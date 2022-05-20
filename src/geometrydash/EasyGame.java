@@ -51,13 +51,6 @@ public class EasyGame extends BasicGame {
         spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
         spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
         spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        //    spikes.add(new Spike(6500, 785, new Image("res/normal_spike.png"), container.getInput()));
-        //    spikes.add(new Spike(7800, 785, new Image("res/normal_spike.png"), container.getInput()));
-        //     spikes.add(new Spike(9000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        // spikes.add(new Spike(12000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
         spikes.add(new Spike(6500, 785, new Image("res/normal_spike.png"), container.getInput()));
         spikes.add(new Spike(7800, 785, new Image("res/normal_spike.png"), container.getInput()));
         spikes.add(new Spike(9000, 785, new Image("res/normal_spike.png"), container.getInput()));
