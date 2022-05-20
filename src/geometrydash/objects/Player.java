@@ -31,7 +31,7 @@ public class Player extends Spielobjekt {
     @Override
     public void draw(Graphics g) {
         image.drawCentered(x, y);
-        g.draw(shape);
+        
     }
 
     public Boolean collide(Shape shape) {

@@ -38,7 +38,7 @@ public class Spike extends Spielobjekt {
     @Override
     public void draw(Graphics g) {
         image.drawCentered(x, y);
-        g.draw(shape);
+
 
     }
 
@@ -58,7 +58,7 @@ public class Spike extends Spielobjekt {
 
         }
         if (ismoving) {
-            this.setX(this.getX() - 3);
+            this.setX(this.getX() - 5);
         }
 
     }
