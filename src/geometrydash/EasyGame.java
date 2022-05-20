@@ -115,7 +115,6 @@ public class EasyGame extends BasicGame {
                 isDead = true;
 
                 if (player.collide(block.getShape())) {
-                    resetAll();
                     music.stop();
                 }
             }
