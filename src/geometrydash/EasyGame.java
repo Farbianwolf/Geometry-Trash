@@ -16,6 +16,10 @@ public class EasyGame extends BasicGame {
     private ArrayList<Spike> spikes = new ArrayList<>();
     private ArrayList<Block> blocks = new ArrayList<>();
 
+    private Music music;
+    private Sound explosion;
+   // private ArrayList <Wand> weande = new ArrayList<>();
+
     // private ArrayList <Wand> weande = new ArrayList<>();
 
     public EasyGame(String title) {
@@ -50,6 +54,7 @@ public class EasyGame extends BasicGame {
         //  blocks.add(new Block(3000, 785, new Image("res/normal_cube.png"), container.getInput()));
 
 
+        explosion = new Sound("")
     }
 
     @Override
