@@ -46,7 +46,7 @@ public class Block extends Spielobjekt {
 
     @Override
     public void update(int delta) {
-        shape.setCenterX(x - 55.5f);
+        shape.setCenterX(x);
         shape.setCenterY(y);
 
 

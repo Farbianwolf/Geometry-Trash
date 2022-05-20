@@ -13,12 +13,15 @@ public class EasyGame extends BasicGame {
     private Player player;
     private Image Background;
     private Image Floor;
+    private Image gameover;
+    private Image pllayer;
     private ArrayList<Spike> spikes = new ArrayList<>();
     private ArrayList<Block> blocks = new ArrayList<>();
+    private boolean isDead = false;
 
     private Music music;
     private Sound explosion;
-   // private ArrayList <Wand> weande = new ArrayList<>();
+    // private ArrayList <Wand> weande = new ArrayList<>();
 
     // private ArrayList <Wand> weande = new ArrayList<>();
 
@@ -44,17 +47,26 @@ public class EasyGame extends BasicGame {
         player = new Player(400, 785, new Image("res/Player_Model.png"), container.getInput());
         Background = new Image("res/Background.png");
         Floor = new Image("res/Floor.png");
-        spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(6500, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(7800, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(9000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        spikes.add(new Spike(12000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        //  blocks.add(new Block(3000, 785, new Image("res/normal_cube.png"), container.getInput()));
+        gameover = new Image("res/Game_Over_Screen.png");
+        pllayer = new Image("res/Player_Model.png");
+        //  spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        //    spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        //    spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        //    spikes.add(new Spike(6500, 785, new Image("res/normal_spike.png"), container.getInput()));
+        //    spikes.add(new Spike(7800, 785, new Image("res/normal_spike.png"), container.getInput()));
+        //     spikes.add(new Spike(9000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        // spikes.add(new Spike(12000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        blocks.add(new Block(20000, 785, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 674, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 563, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 452, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 341, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 230, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 119, new Image("res/normal_cube.png"), container.getInput()));
+        blocks.add(new Block(20000, 8, new Image("res/normal_cube.png"), container.getInput()));
 
 
-        explosion = new Sound("")
+        //   explosion = new Sound("");
     }
 
     @Override
@@ -62,8 +74,14 @@ public class EasyGame extends BasicGame {
         Background.draw();
         Floor.draw();
         player.draw(g);
+
+
         for (Block block : blocks) {
             block.draw(g);
+        }
+
+        if (isDead) {
+            gameover.draw(0, 0);
         }
 
 
@@ -90,9 +108,9 @@ public class EasyGame extends BasicGame {
         player.update(delta);
         for (Block block : blocks) {
             block.update(delta);
-
             if (player.collide(block.getShape())) {
-                resetAll();
+                isDead = true;
+
             }
 
 
