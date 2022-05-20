@@ -4,6 +4,9 @@ import geometrydash.objects.Block;
 import geometrydash.objects.Player;
 import geometrydash.objects.Spike;
 import org.newdawn.slick.*;
+//import org.newdawn.slick.gui.AbstractComponent;
+//import org.newdawn.slick.gui.ComponentListener;
+//import org.newdawn.slick.gui.MouseOverArea;
 
 import java.util.ArrayList;
 
@@ -66,7 +69,9 @@ public class EasyGame extends BasicGame {
         blocks.add(new Block(20000, 8, new Image("res/normal_cube.png"), container.getInput()));
 
 
-        //   explosion = new Sound("");
+        explosion = new Sound("res/game over.wav");
+        music = new Music("res/Backgroundsong.wav");
+        music.play();
     }
 
     @Override
@@ -101,6 +106,8 @@ public class EasyGame extends BasicGame {
 
 
             if (player.collide(spike.getShape())) {
+                explosion.play();
+                music.loop();
                 resetAll();
                 break;
             }
@@ -111,9 +118,10 @@ public class EasyGame extends BasicGame {
             if (player.collide(block.getShape())) {
                 isDead = true;
 
+            if (player.collide(block.getShape())) {
+                resetAll();
+                music.stop();
             }
-
-
         }
     }
 
