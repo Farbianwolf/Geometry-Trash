@@ -6,21 +6,26 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
-public class Player extends Spielobjekt {
-    private Input input;
-    private int szeit = 700;
-    private int aktzeit = 0;
-    private boolean isjumping = false;
-    private int jumpPositionY = 0;
+public class Block extends Spielobjekt {
+    private final int startX;
+    private final int startY;
     private boolean ismoving = false;
     private int movePositionX = 0;
+    private Input input;
 
-
-    public Player(int x, int y, Image image, Input input) {
+    public Block(int x, int y, Image image, Input input) {
         super(x, y, image);
+        startX = x;
+        startY = y;
         this.input = input;
         shape = new Rectangle(x, y, 111, 111);
 
+
+    }
+
+    public void resetBlock() {
+        this.setX(startX);
+        this.setY(startY);
     }
 
     @Override
@@ -32,6 +37,7 @@ public class Player extends Spielobjekt {
     public void draw(Graphics g) {
         image.drawCentered(x, y);
         g.draw(shape);
+
     }
 
     public Boolean collide(Shape shape) {
@@ -40,29 +46,18 @@ public class Player extends Spielobjekt {
 
     @Override
     public void update(int delta) {
-
+        shape.setCenterX(x - 55.5f);
         shape.setCenterY(y);
-        shape.setCenterX(x);
 
 
-        if (input.isKeyDown(input.KEY_SPACE) && !isjumping) {
+        if (input.isKeyDown(input.KEY_G) && !ismoving) {
 
-            isjumping = true;
-            aktzeit = 0;
-            jumpPositionY = this.getY();
+            movePositionX = this.getX();
+            ismoving = true;
+
         }
-
-        if (isjumping) {
-            if (aktzeit < (szeit / 2))
-                this.setY(this.getY() - 3);
-            else
-                this.setY(this.getY() + 3);
-            aktzeit = aktzeit + delta;
-        }
-
-        if ((aktzeit > szeit)) {
-            isjumping = false;
-            this.setY(jumpPositionY);
+        if (ismoving) {
+            this.setX(this.getX() - 3);
         }
 
     }

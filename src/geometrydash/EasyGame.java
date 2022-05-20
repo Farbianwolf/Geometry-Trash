@@ -1,8 +1,11 @@
 package geometrydash;
 
+import geometrydash.objects.Block;
 import geometrydash.objects.Player;
 import geometrydash.objects.Spike;
 import org.newdawn.slick.*;
+
+import java.util.ArrayList;
 
 
 public class EasyGame extends BasicGame {
@@ -10,8 +13,10 @@ public class EasyGame extends BasicGame {
     private Player player;
     private Image Background;
     private Image Floor;
-    private Spike Spike;
-   // private ArrayList <Wand> weande = new ArrayList<>();
+    private ArrayList<Spike> spikes = new ArrayList<>();
+    private ArrayList<Block> blocks = new ArrayList<>();
+
+    // private ArrayList <Wand> weande = new ArrayList<>();
 
     public EasyGame(String title) {
         super(title);
@@ -20,21 +25,31 @@ public class EasyGame extends BasicGame {
     public static void main(String[] argv) {
         try {
             AppGameContainer container = new AppGameContainer(new EasyGame("EasyGame"));
-            container.setDisplayMode(1920,1080,false);
+            container.setDisplayMode(1920, 1080, false);
             container.start();
         } catch (SlickException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * Create a new image rendering test
      */
     @Override
     public void init(GameContainer container) throws SlickException {
-        player = new Player( 400, 785,new Image("res/Player_Model.png"), container.getInput());
+        player = new Player(400, 785, new Image("res/Player_Model.png"), container.getInput());
         Background = new Image("res/Background.png");
         Floor = new Image("res/Floor.png");
-        Spike = new Spike(500,785,new Image("res/normal_spike.png"));
+        spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(6500, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(7800, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(9000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(12000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        //  blocks.add(new Block(3000, 785, new Image("res/normal_cube.png"), container.getInput()));
+
+
     }
 
     @Override
@@ -42,29 +57,62 @@ public class EasyGame extends BasicGame {
         Background.draw();
         Floor.draw();
         player.draw(g);
-        Spike.draw(g);
+        for (Block block : blocks) {
+            block.draw(g);
+        }
+
+
+        for (Spike spike : spikes) {
+            spike.draw(g);
+        }
 
 
     }
 
     @Override
-    public void update(GameContainer container, int delta) throws SlickException{
+    public void update(GameContainer container, int delta) throws SlickException {
 
-    player.update(delta);
-
-     //   for (Wand w : waende) {
-      //      if (w.collide(Spike.getShape()) == 1) {
-                // von oben
-         //   }
-       //     if (w.collide(geometrydash.objects.Spike.getShape()) == 2) {
-                // von link kollision
-         //   }
-      //  }
+        player.update(delta);
+        for (Spike spike : spikes) {
+            spike.update(delta);
 
 
+            if (player.collide(spike.getShape())) {
+                resetAll();
+                break;
+            }
+        }
+        player.update(delta);
+        for (Block block : blocks) {
+            block.update(delta);
+
+            if (player.collide(block.getShape())) {
+                resetAll();
+            }
+
+
+        }
     }
 
+    //   for (Wand w : waende) {
+    //      if (w.collide(Spike.getShape()) == 1) {
+    // von oben
+    //   }
+    //     if (w.collide(geometrydash.objects.Spike.getShape()) == 2) {
+    // von link kollision
+    //   }
+    //  }
 
 
+    void resetAll() {
+        for (Spike spike : spikes) {
+            spike.resetSpike();
+        }
 
+        for (Block block : blocks) {
+            block.resetBlock();
+        }
+
+    }
 }
+
