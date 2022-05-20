@@ -4,9 +4,6 @@ import geometrydash.objects.Block;
 import geometrydash.objects.Player;
 import geometrydash.objects.Spike;
 import org.newdawn.slick.*;
-//import org.newdawn.slick.gui.AbstractComponent;
-//import org.newdawn.slick.gui.ComponentListener;
-//import org.newdawn.slick.gui.MouseOverArea;
 
 import java.util.ArrayList;
 
@@ -17,7 +14,6 @@ public class EasyGame extends BasicGame {
     private Image Background;
     private Image Floor;
     private Image gameover;
-    private Image pllayer;
     private ArrayList<Spike> spikes = new ArrayList<>();
     private ArrayList<Block> blocks = new ArrayList<>();
     private boolean isDead = false;
@@ -51,10 +47,10 @@ public class EasyGame extends BasicGame {
         Background = new Image("res/Background.png");
         Floor = new Image("res/Floor.png");
         gameover = new Image("res/Game_Over_Screen.png");
-        pllayer = new Image("res/Player_Model.png");
-        //  spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        //    spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
-        //    spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
+
+        spikes.add(new Spike(1000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(2000, 785, new Image("res/normal_spike.png"), container.getInput()));
+        spikes.add(new Spike(4000, 785, new Image("res/normal_spike.png"), container.getInput()));
         //    spikes.add(new Spike(6500, 785, new Image("res/normal_spike.png"), container.getInput()));
         //    spikes.add(new Spike(7800, 785, new Image("res/normal_spike.png"), container.getInput()));
         //     spikes.add(new Spike(9000, 785, new Image("res/normal_spike.png"), container.getInput()));
@@ -118,22 +114,22 @@ public class EasyGame extends BasicGame {
             if (player.collide(block.getShape())) {
                 isDead = true;
 
-            if (player.collide(block.getShape())) {
-                resetAll();
-                music.stop();
+                if (player.collide(block.getShape())) {
+                    resetAll();
+                    music.stop();
+                }
             }
         }
+
+        //   for (Wand w : waende) {
+        //      if (w.collide(Spike.getShape()) == 1) {
+        // von oben
+        //   }
+        //     if (w.collide(geometrydash.objects.Spike.getShape()) == 2) {
+        // von link kollision
+        //   }
+        //  }
     }
-
-    //   for (Wand w : waende) {
-    //      if (w.collide(Spike.getShape()) == 1) {
-    // von oben
-    //   }
-    //     if (w.collide(geometrydash.objects.Spike.getShape()) == 2) {
-    // von link kollision
-    //   }
-    //  }
-
 
     void resetAll() {
         for (Spike spike : spikes) {
@@ -146,4 +142,5 @@ public class EasyGame extends BasicGame {
 
     }
 }
+
 
