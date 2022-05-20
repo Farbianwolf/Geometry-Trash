@@ -88,8 +88,9 @@ public class EasyGame extends BasicGame {
 
 
             if (player.collide(spike.getShape())) {
-                resetAll();
                 explosion.play();
+                music.loop();
+                resetAll();
                 break;
             }
         }
@@ -99,9 +100,8 @@ public class EasyGame extends BasicGame {
 
             if (player.collide(block.getShape())) {
                 resetAll();
+                music.stop();
             }
-
-
         }
     }
 
